@@ -1,0 +1,291 @@
+---
+title: "Project 10"
+author: "Marjorie Blanco"
+date: "March 16, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1
+
+## Intro
+
+```{r}
+x = 1 + 1
+x
+y = 2 * x
+y
+z <- (x + y)
+z
+
+1 + 2
+```
+
+## Vectors and Indexing
+
+```{r}
+x <- c(1.0, 2)
+x
+
+
+typeof(x)
+
+
+y <- c("abc", "d", "e", 'fgh')
+y
+
+typeof(y)
+
+y %in% letters
+
+
+sum(y %in% letters)
+
+z <- 1:5
+z
+
+typeof(z)
+
+w <- c(TRUE, FALSE, TRUE, TRUE)
+w
+
+typeof(w)
+
+sum(w)
+
+gender <- factor(c("Male", "Female", "Female", "Male"))
+gender
+
+levels(gender)
+
+sum(gender == "male")
+
+sum(gender == "Male")
+
+table(gender)
+```
+
+## Indexing
+
+```{r}
+x[1]
+
+y[3]
+
+z[2:4]
+
+y[c(1, length(y))]
+
+gender[c(1, length(gender))]
+
+c(x, y)
+```
+
+## Lists
+
+```{r}
+aList <- list(1, 2, list(1, 2, "abc"))
+aList
+
+aList[[2]]
+
+aList[[3]]
+
+aList[[3]][[2]]
+
+aList[[2]]
+
+aList[2]
+
+typeof(aList[[2]])
+
+typeof(aList[2])
+
+x[-1]
+
+y[-length(y)]
+
+aList[c(-1, -length(aList))]
+
+#y[c(-1, 3:4)]
+
+y[w]
+```
+
+## Missing and null values
+
+```{r}
+miss1 <- c(1.0, NA, 2.0)
+2 * miss1
+
+mean(miss1)
+
+mean(miss1, na.rm = TRUE)
+
+NULL
+
+c()
+
+is.null(c())
+
+is.null(NA)
+
+is.na(c())
+
+is.na(NA)
+```
+
+## Arithmetic and logical operations
+
+```{r}
+1:3 + 2:4
+
+2 * 1:3
+
+2 * (1:3)
+
+c(2, 4, 6) / c(2, 4, 6)
+
+c(2, 4, 6) / 2
+
+c(2, 4, 6, 8) / c(1, 2)
+
+c(2, 4, 6, 8) / c(1, 2, 1, 2)
+
+c(2, 4, 6) / c(1, 2)
+
+xx <- 1:3
+xx == xx
+
+xx > 1
+
+xx <- 1:10
+xx[ xx >= 5]
+
+xx[ xx %% 2 == 0]
+
+xx[ xx %% 2 != 0]
+```
+
+## Coercion
+
+```{r}
+xx <- 1:10
+xx %% 2 == 0
+
+sum(xx %% 2 == 0)
+
+xx <- 1:5
+as.integer(xx %% 2 == 0)
+
+as.character(xx)
+
+as.list(xx)
+
+as.Date(c("2016-06-15", "2016-02-30"))
+
+as.Date("9/27/2016", format = "%m/%d/%Y")
+
+Sys.timezone()
+```
+
+## Dates and Times
+
+```{r}
+library(lubridate)
+ymd(c("20160927", "20160230"))
+mdy(c("6/12/16", "2/9/16"))
+dmy(c("1/9/2016", "26/9/16"))
+parse_date_time("9/27/2016 10:30:00",
+                orders = "%m/%d/%y %H:%M:%S",
+                tz = Sys.timezone())
+```
+
+## Naming
+
+```{r}
+named_x <- c(a = 1.02, b = 2, 3)
+named_x
+
+names(named_x)
+
+named_x["b"]
+
+named_x[c("a", "b")]
+
+named_list <- list(x = x, y = y, zed = z)
+named_list[c("x", "zed")]
+
+named_list$zed
+
+aSummary <- summary(1:10)
+aSummary
+
+names(aSummary)
+
+typeof(aSummary)
+
+aSummary["Median"]
+```
+
+## Matrices
+
+```{r}
+m <- matrix(1:6, nrow = 3)
+m
+
+xx <- 1:3
+yy <- 4:6
+m2 <- cbind(xx, yy)
+rbind(xx, yy)
+
+m[1, 2]
+
+m[ , 2]
+
+m2[, "yy"]
+
+m[3, ]
+```
+
+## Datasets
+
+```{r}
+library(readr)
+data.men <- read_delim("100men", "\t", escape_double = FALSE, trim_ws = TRUE)
+
+str(data.men)
+```
+#
+
+```{r}
+example(plot)
+
+library(ggplot2)
+example(qplot)
+```
+
+# Part 2
+
+```{r}
+sessionInfo()
+.Machine$integer.max
+gc(verbose = T)
+
+example_matrix <- matrix(1:25, nrow = 5, ncol = 5)
+object.size(example_matrix)
+
+system.time(example_matrix %*% example_matrix)
+system.time(example_matrix %*% example_matrix %*% example_matrix)
+system.time(example_matrix %*% example_matrix %*% example_matrix %*% example_matrix)
+
+example_matrix <- matrix(1:10000000, nrow = 1000, ncol = 1000)
+object.size(example_matrix)
+
+system.time(example_matrix %*% example_matrix)
+system.time(example_matrix %*% example_matrix %*% example_matrix)
+system.time(example_matrix %*% example_matrix %*% example_matrix %*% example_matrix)
+````
